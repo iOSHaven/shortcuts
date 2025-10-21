@@ -41,6 +41,6 @@ class Shortcuts extends Component
             "recent" => $query->orderBy("updated_at", "desc"),
             default => $query->orderByDesc("downloads"),
         };
-        return $query->paginate(10);
+        return $query->paginate(36);
     }
 }

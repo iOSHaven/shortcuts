@@ -85,10 +85,14 @@ class AppServiceProvider extends ServiceProvider
                 $middle[$i] = $paginator->url($i);
             }
 
-            // for ($i = count($middle); $i < $window; $i++) {
-            //     $j = max(array_keys($middle)) - $i;
-            //     $middle[$j] = $paginator->url($j);
-            // }
+            for ($i = count($middle); $i < $window; $i++) {
+                if ($i > 0) {
+                    $j = max(array_keys($middle)) - $i;
+                    if ($j > 1) {
+                        $middle[$j] = $paginator->url($j);
+                    }
+                }
+            }
             ksort($middle);
             $elements[] = $middle;
             return $elements;
