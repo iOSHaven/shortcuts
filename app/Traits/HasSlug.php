@@ -8,7 +8,7 @@ trait HasSlug
 {
     public function setSlugAttribute($value)
     {
-        if (static::whereSlug($slug = Str::slug($value))->exists()) {
+        if (static::whereSlug($slug = Str::slug($value) ?: "s")->exists()) {
             $slug = $this->incrementSlug($slug);
         }
 

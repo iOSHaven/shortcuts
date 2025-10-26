@@ -13,14 +13,12 @@ class ShortcutObserver
      */
     public function creating(Shortcut $shortcut): void
     {
-        $shortcut->slug = Str::slug($shortcut->name);
+        $shortcut->slug = Str::slug($shortcut->name) ?: Str::random(5);
     }
 
     public function saving(Shortcut $shortcut): void
     {
         $parsedown = new Parsedown();
-        $parsedown->setMarkupEscaped(true);
-        $parsedown->setSafeMode(true);
         $shortcut->html = $parsedown->text($shortcut->markdown);
     }
 

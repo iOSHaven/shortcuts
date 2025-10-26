@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @plugin "@tailwindcss/typography";
+
+.editor-preview-side {
+    @apply prose;
+}

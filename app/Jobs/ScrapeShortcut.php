@@ -14,17 +14,21 @@ use Nesk\Rialto\Data\JsFunction;
 use League\HTMLToMarkdown\HtmlConverter;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
+use League\HTMLToMarkdown\Converter\TableConverter;
 
 class ScrapeShortcut implements ShouldQueue
 {
     use Queueable;
+
+    public $url;
+    public $downloadUrl;
 
     /**
      * Create a new job instance.
      */
     public function __construct(public string $href)
     {
-        //
+        $this->url = "https://routinehub.co{$this->href}";
     }
 
     /**
@@ -42,11 +46,12 @@ class ScrapeShortcut implements ShouldQueue
             "Accept-Language" => "en-US,en;q=0.9",
             "Referer" => "https://routinehub.co/",
         ]);
-        $response = $client->get("https://routinehub.co{$this->href}");
+        $response = $client->get($this->url);
         $html = $response->body();
         $crawler = new Crawler($html);
         $downloadLink = $crawler->filter(".actions a")->first()->attr("href");
-        $shortcutUrl = URL::resolve("https://routinehub.co$downloadLink");
+        $this->downloadUrl = "https://routinehub.co$downloadLink";
+        $shortcutUrl = URL::resolve($this->downloadUrl);
 
         $description = $crawler
             ->filter(".description .content")
@@ -56,6 +61,7 @@ class ScrapeShortcut implements ShouldQueue
         $subtitle = $crawler->filter(".titles .subtitle")->first()->html();
 
         $converter = new HtmlConverter();
+        $converter->getEnvironment()->addConverter(new TableConverter());
         $markdown = $converter->convert($description);
 
         $shortcutData = $this->scrapeApplePage($shortcutUrl["final"]);
@@ -67,7 +73,7 @@ class ScrapeShortcut implements ShouldQueue
         // todo save icon image to public storage
         $data = [
             "icon" => Storage::url($filename),
-            "link" => $shortcutData["link"],
+            "link" => $shortcutUrl["final"],
             "name" => $shortcutData["name"],
             "markdown" => $markdown,
             "short" => $subtitle,
@@ -89,7 +95,6 @@ class ScrapeShortcut implements ShouldQueue
             JsFunction::createWithBody("
                 return {
                 icon: document.querySelector('#shortcut-icon').src,
-                link: document.querySelector('#shortcut-link').href,
                 name: document.querySelector('#shortcut-name').innerHTML
                 };
             "),
