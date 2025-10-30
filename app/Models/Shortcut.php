@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasSlug;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 
@@ -31,12 +32,15 @@ class Shortcut extends Model
 
     public function toSearchableArray()
     {
-        return Arr::only($this->toArray(), [
-            "name",
-            "short",
-            "created_at",
-            "downloads",
-        ]);
+        return [
+            ...Arr::only($this->toArray(), [
+                "name",
+                "short",
+                "created_at",
+                "downloads",
+            ]),
+            "author_ids" => $this->authors()->pluck("users.id")->toArray(),
+        ];
     }
 
     public function getDetailsUrlAttribute()
@@ -47,5 +51,15 @@ class Shortcut extends Model
     public function getDownloadUrlAttribute()
     {
         return $this->slug ? route("shortcut.download", $this) : "#";
+    }
+
+    public function getEditUrlAttribute()
+    {
+        return $this->slug ? route("shortcut.edit", $this) : "#";
+    }
+
+    public function authors(): MorphToMany
+    {
+        return $this->morphToMany(User::class, "model", table: "authorables");
     }
 }

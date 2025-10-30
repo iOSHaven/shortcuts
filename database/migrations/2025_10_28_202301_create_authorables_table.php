@@ -10,18 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("users", function (Blueprint $table) {
+        Schema::create("authorables", function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->timestamps();
-        });
 
-        Schema::create("social_accounts", function (Blueprint $table) {
-            $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
-            $table->string("provider_name");
-            $table->string("provider_id");
-            $table->json("data");
+
+            $table->morphs("model");
+
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("users");
+        Schema::dropIfExists("authorables");
     }
 };

@@ -81,7 +81,9 @@ class ScrapeShortcut implements ShouldQueue
 
         $id = Str::between($this->href, "/shortcut/", "/");
 
-        Shortcut::updateOrCreate(["scrape_id" => $id], $data);
+        /** @var \App\Models\Shortcut $shortcut */
+        $shortcut = Shortcut::updateOrCreate(["scrape_id" => $id], $data);
+        $shortcut->authors()->syncWithoutDetaching([1]);
     }
 
     public function scrapeApplePage($url)

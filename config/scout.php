@@ -145,7 +145,7 @@ return [
         "key" => env("MEILISEARCH_KEY"),
         "index-settings" => [
             Shortcut::class => [
-                "filterableAttributes" => ["name", "short"],
+                "filterableAttributes" => ["name", "short", "author_ids"],
                 "sortableAttributes" => ["created_at", "downloads"],
             ],
             // 'users' => [

@@ -1,5 +1,6 @@
-<div class="space-y-6">
-    <div class="space-y-3">
+<x-page>
+
+    <x-page-header>
         <div class="flex items-center space-x-3">
             <h1 class="text-5xl">Shortcuts</h1>
             <a href="{{ route('shortcut.create') }}" class="flex items-center space-x-1 border border-black px-3 py-1">
@@ -8,16 +9,9 @@
             </a>
         </div>
         <p>Browse Apple shortcuts and add them to your phone or mac.</p>
-    </div>
+    </x-page-header>
 
-    <div>
-        <input
-            type="text"
-            placeholder="Search..."
-            wire:model.live.debounce.300ms="search"
-            class="border rounded px-2 py-3 w-full"
-        />
-    </div>
+    <x-search />
 
     <div class="flex space-x-3">
         <x-sort-button key="popular">Popular</x-sort-button>
@@ -54,4 +48,4 @@
         @endforelse
     </div>
     {{ $shortcuts->links() }}
-</div>
+</x-page>

@@ -16,7 +16,7 @@ class RoutineHubSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < env("ROUTINEHUB_PAGES", 10); $i++) {
+        for ($i = 1; $i <= env("ROUTINEHUB_PAGES", 10); $i++) {
             $response = Http::withHeaders([
                 "User-Agent" =>
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " .
@@ -36,7 +36,12 @@ class RoutineHubSeeder extends Seeder
                 ".column.is-6.is-4-widescreen.is-3-widescreen a",
             );
 
-            // dump($links);
+            // dd(
+            //     collect($links)->map(
+            //         fn($link) => $link->attributes->getNamedItem("href")
+            //             ->nodeValue,
+            //     ),
+            // );
             foreach ($links as $link) {
                 $href = $link->attributes->getNamedItem("href")->nodeValue;
                 ScrapeShortcut::dispatch($href);

@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Dashboard;
+use App\Livewire\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shortcuts;
 use App\Livewire\Shortcut;
@@ -12,17 +14,19 @@ Route::get("/shortcut/download/{shortcut:slug}", [
     ShortcutController::class,
     "download",
 ])->name("shortcut.download");
-Route::get("/shortcut/create", ShortcutCreate::class)->name("shortcut.create");
-Route::get("/shortcut/edit/{shortcut:slug}", ShortcutEdit::class)->name(
-    "shortcut.edit",
-);
+Route::get("/shortcut/create", ShortcutCreate::class)
+    ->name("shortcut.create")
+    ->middleware(["auth", "verified"]);
+Route::get("/shortcut/edit/{shortcut:slug}", ShortcutEdit::class)
+    ->name("shortcut.edit")
+    ->middleware(["auth", "verified", "can:update,shortcut"]);
 Route::get("/shortcut/{shortcut:slug}", Shortcut::class)->name("shortcut");
 
-Route::view("dashboard", "dashboard")
+Route::get("dashboard", Dashboard::class)
     ->middleware(["auth", "verified"])
     ->name("dashboard");
 
-Route::view("profile", "profile")
+Route::get("profile", Profile::class)
     ->middleware(["auth"])
     ->name("profile");
 
