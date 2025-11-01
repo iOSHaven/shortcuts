@@ -5,6 +5,8 @@ namespace App\Jobs;
 use App\Models\Shortcut;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Parsedown;
@@ -83,7 +85,12 @@ class ScrapeShortcut implements ShouldQueue
 
         /** @var \App\Models\Shortcut $shortcut */
         $shortcut = Shortcut::updateOrCreate(["scrape_id" => $id], $data);
-        $shortcut->authors()->syncWithoutDetaching([1]);
+
+        DB::table("authorables")->insert([
+            "user_id" => 1,
+            "model_type" => Shortcut::class,
+            "model_id" => $shortcut->id,
+        ]);
     }
 
     public function scrapeApplePage($url)

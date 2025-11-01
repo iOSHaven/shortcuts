@@ -16,7 +16,9 @@
         @stack('scripts')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="bg-white dark:bg-gray-800 dark:text-white">
         {{ $slot }}
+
+        <x-footer/>
     </body>
 </html>

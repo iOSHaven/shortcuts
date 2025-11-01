@@ -16,6 +16,7 @@ class ShortcutCreate extends Component
     public $icloud_url;
     public $icon;
     public $name;
+    public $short;
     public $description = "Enter a description.";
 
     public function render()
@@ -26,13 +27,15 @@ class ShortcutCreate extends Component
     public function save()
     {
         $this->validate([
-            "description" => ["nullable", "string", "max:65000"],
+            "description" => ["min:20", "string", "max:65000", "required"],
+            "short" => ["min:3", "max:100", "string", "required"],
         ]);
 
         $shortcut = Shortcut::create([
             "name" => $this->name,
             "icon" => $this->icon,
             "markdown" => $this->description,
+            "short" => $this->short,
             "link" => $this->icloud_url,
         ]);
 

@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create("users", function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->boolean("can_view_horizon")->default(0);
             $table->timestamps();
         });
 

@@ -2,7 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 @plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
 
-.editor-preview-side {
+.editor-preview-side,
+.editor-preview {
     @apply prose;
+    max-width: unset;
+}
+
+.CodeMirror pre {
+    @apply dark:text-white;
+}
+
+.CodeMirror {
+    @apply dark:bg-slate-800;
+}
+
+.editor-toolbar a {
+    @apply dark:!text-white;
+}
+
+.editor-toolbar a.active,
+.editor-toolbar a:hover {
+    @apply dark:!text-black;
 }

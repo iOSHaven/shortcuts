@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Shortcut;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,27 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $user = User::create(["name" => "iOS Haven"]);
 
-        str(config("app.app_admins"))
-            ->explode(",")
-            ->each(function ($email) {
-                User::factory()->create([
-                    "name" => "System",
-                    "email" => $email,
-                ]);
-            });
-
-        if (config("app.env") !== "production") {
-            User::factory(10)->create();
-            for ($i = 2; $i < 8; $i++) {
-                DB::table("authorables")->insert([
-                    "user_id" => $i,
-                    "model_id" => 1,
-                    "model_type" => Shortcut::class,
-                ]);
-            }
-        }
+        $user->socialAccounts()->create([
+            "provider_name" => "twitter",
+            "provider_id" => "715729557769166848",
+            "data" => [
+                "id" => "715729557769166848",
+                "nickname" => "iOSHavencom",
+                "name" => "iOS Haven",
+                "avatar" =>
+                    "http://pbs.twimg.com/profile_images/1478410862012600320/rsEvqO2f_normal.jpg",
+            ],
+        ]);
 
         $this->call([RoutineHubSeeder::class]);
     }

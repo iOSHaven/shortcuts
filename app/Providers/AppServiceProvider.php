@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Livewire\Livewire;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -105,12 +108,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post("/livewire/update", $handle)
+                ->middleware("web")
+                ->prefix(LaravelLocalization::setLocale());
+        });
         Event::listen(function (
             \SocialiteProviders\Manager\SocialiteWasCalled $event,
         ) {
             $event->extendSocialite(
                 "google",
                 \SocialiteProviders\Google\Provider::class,
+            );
+            $event->extendSocialite(
+                "facebook",
+                \SocialiteProviders\Facebook\Provider::class,
+            );
+            $event->extendSocialite(
+                "twitter",
+                \SocialiteProviders\Twitter\Provider::class,
+                \SocialiteProviders\Twitter\Server::class,
             );
         });
     }

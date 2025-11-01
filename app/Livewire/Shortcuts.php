@@ -39,7 +39,7 @@ class Shortcuts extends Component
             "newest" => $query->orderBy("created_at", "desc"),
             "oldest" => $query->orderBy("created_at", "asc"),
             "recent" => $query->orderBy("updated_at", "desc"),
-            default => $query->orderByDesc("downloads"),
+            default => $query->orderByDesc("score"),
         };
         return $query->paginate(36);
     }

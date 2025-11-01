@@ -19,8 +19,10 @@ return new class extends Migration {
             $table->string("name")->nullable();
             $table->string("short")->nullable();
             $table->string("link")->nullable();
-            $table->bigInteger("downloads")->default(0);
-            $table->bigInteger("views")->default(0);
+            $table->bigInteger("downloads_all_time")->default(0);
+            $table->bigInteger("views_all_time")->default(0);
+            $table->bigInteger("downloads_last_24")->default(0);
+            $table->bigInteger("views_last_24")->default(0);
             $table->string("slug")->unique();
             $table->timestamps();
         });

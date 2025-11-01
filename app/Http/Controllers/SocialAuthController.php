@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Socialite;
 use Throwable;
 use Illuminate\Support\Str;
-use function GuzzleHttp\json_encode;
 
 class SocialAuthController extends Controller
 {
@@ -36,6 +35,8 @@ class SocialAuthController extends Controller
             ->first();
 
         if ($account) {
+            $account->data = $socialUser;
+            $account->save();
             // Log in the linked user
             Auth::login($account->user);
             return redirect()->intended(route("dashboard"));

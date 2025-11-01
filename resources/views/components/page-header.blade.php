@@ -4,9 +4,9 @@
     </div>
     <div class="flex items-center">
         @auth
-        <a href="{{ route('dashboard') }}">Dashboard</a>
+        <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
         @else
-        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('login') }}">{{ __('Login') }}</a>
         @endauth
     </div>
 </div>

@@ -3,8 +3,7 @@
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     /**
      * Log the current user out of the application.
      */
@@ -12,9 +11,10 @@ new class extends Component
     {
         $logout();
 
-        $this->redirect('/', navigate: true);
+        $this->redirect("/", navigate: true);
     }
-}; ?>
+};
+?>
 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
@@ -29,6 +29,12 @@ new class extends Component
                 </div>
 
                 <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('shortcuts')" :active="request()->routeIs('shortcuts')" wire:navigate>
+                        {{ __('Home') }}
+                    </x-nav-link>
+                </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
@@ -81,6 +87,9 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('shortcuts')" :active="request()->routeIs('shortcuts')" wire:navigate>
+                {{ __('Home') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>

@@ -11,7 +11,7 @@
             @endcan
         </div>
     </div>
-    <div class="prose">
+    <div class="prose dark:prose-invert">
         {!! $this->shortcut->html !!}
     </div>
 </div>
