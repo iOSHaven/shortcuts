@@ -1,13 +1,14 @@
 <?php
 
 return [
+    "home" => "/",
     "shortcut" => [
-        "download" => "/atalho/baixar/{shortcut:slug}",
-        "create" => "/atalho/criar",
-        "edit" => "/atalho/editar/{shortcut:slug}",
-        "detail" => "/atalho/{shortcut:slug}",
+        "download" => "atalho/baixar/{shortcut}",
+        "create" => "atalho/criar",
+        "edit" => "atalho/editar/{shortcut}",
+        "detail" => "atalho/{shortcut}",
     ],
-    "dashboard" => "/painel",
-    "profile" => "/perfil",
-    "how-to-delete" => "/como-excluir",
+    "dashboard" => "painel",
+    "profile" => "perfil",
+    "how-to-delete" => "como-excluir",
 ];

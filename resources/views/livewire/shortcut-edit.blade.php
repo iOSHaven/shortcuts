@@ -4,7 +4,7 @@
     <x-back-button />
     <div class="space-y-3">
         <div class="flex items-center space-x-3">
-            <h1 class="text-5xl">Edit Shortcut</h1>
+            <h1 class="text-5xl">{{ __('Edit Shortcut') }}</h1>
         </div>
     </div>
 

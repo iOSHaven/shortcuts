@@ -8,9 +8,12 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use \Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
+
     /**
      * Register any application services.
      */
@@ -108,11 +111,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        RouteServiceProvider::loadCachedRoutesUsing(
+            fn() => $this->loadCachedRoutes(),
+        );
+
         Livewire::setUpdateRoute(function ($handle) {
             return Route::post("/livewire/update", $handle)
                 ->middleware("web")
                 ->prefix(LaravelLocalization::setLocale());
         });
+
         Event::listen(function (
             \SocialiteProviders\Manager\SocialiteWasCalled $event,
         ) {

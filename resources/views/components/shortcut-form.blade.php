@@ -47,6 +47,15 @@
             @if ($errors->any())
                 <span class="text-red-500">{{ __('Please fix errors.') }}</span>
             @endif
+            <div
+                x-data="{ show: @entangle('saved') }"
+                x-show="show"
+                x-transition
+                x-init="$watch('show', () => {setTimeout(() => show = false, 3000)})"
+                class="text-green-600 mt-2"
+            >
+                {{ __('Saved.') }}
+            </div>
         </div>
 
     </form>

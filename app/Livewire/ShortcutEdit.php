@@ -10,6 +10,7 @@ class ShortcutEdit extends Component
     public Shortcut $shortcut;
     public $description = "Enter a description";
     public $short = "";
+    public $saved = false;
 
     public function mount()
     {
@@ -19,6 +20,7 @@ class ShortcutEdit extends Component
 
     public function save()
     {
+        $this->saved = false;
         $this->validate([
             "short" => ["min:3", "max:100", "string", "required"],
             "description" => ["required", "min:20", "max:65000", "string"],
@@ -26,6 +28,7 @@ class ShortcutEdit extends Component
         $this->shortcut->markdown = $this->description;
         $this->shortcut->short = $this->short;
         $this->shortcut->save();
+        $this->saved = true;
     }
 
     public function render()

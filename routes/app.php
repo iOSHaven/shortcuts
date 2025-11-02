@@ -11,7 +11,7 @@ use App\Livewire\ShortcutEdit;
 use App\Http\Controllers\ShortcutController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get("/", Shortcuts::class)->name("shortcuts");
+Route::get("/", Shortcuts::class)->name("home");
 
 Route::get(LaravelLocalization::transRoute("routes.shortcut.download"), [
     ShortcutController::class,
@@ -35,7 +35,7 @@ Route::get(
 Route::get(
     LaravelLocalization::transRoute("routes.shortcut.detail"),
     Shortcut::class,
-)->name("shortcut");
+)->name("shortcut.detail");
 
 Route::get(
     LaravelLocalization::transRoute("routes.dashboard"),
@@ -51,4 +51,4 @@ Route::get(LaravelLocalization::transRoute("routes.profile"), Profile::class)
 Route::get(
     LaravelLocalization::transRoute("routes.how-to-delete"),
     HowToDelete::class,
-);
+)->name("how-to-delete");
