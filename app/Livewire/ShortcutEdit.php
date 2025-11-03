@@ -23,7 +23,7 @@ class ShortcutEdit extends Component
         $this->saved = false;
         $this->validate([
             "short" => ["min:3", "max:100", "string", "required"],
-            "description" => ["required", "min:20", "max:65000", "string"],
+            "description" => ["required", "min:20", "max:60000", "string"],
         ]);
         $this->shortcut->markdown = $this->description;
         $this->shortcut->short = $this->short;

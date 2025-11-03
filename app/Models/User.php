@@ -19,7 +19,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = ["name", "email", "password"];
+    protected $fillable = [
+        "name",
+        "email",
+        "password",
+        "can_view_horizon",
+        "can_crud_posts",
+        "can_modify_slugs",
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -53,5 +60,10 @@ class User extends Authenticatable
             "model",
             table: "authorables",
         );
+    }
+
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, "model", table: "authorables");
     }
 }

@@ -39,7 +39,7 @@ class SocialAuthController extends Controller
             $account->save();
             // Log in the linked user
             Auth::login($account->user);
-            return redirect()->intended(route("dashboard"));
+            return redirect()->intended(route("dashboard.shortcuts"));
         }
 
         if (Auth::check()) {
@@ -67,6 +67,6 @@ class SocialAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended(route("dashboard"));
+        return redirect()->intended(route("dashboard.shortcuts"));
     }
 }

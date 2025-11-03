@@ -6,13 +6,20 @@ use Illuminate\Support\Str;
 
 trait HasSlug
 {
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
     public function setSlugAttribute($value)
     {
-        if (static::whereSlug($slug = Str::slug($value) ?: "s")->exists()) {
-            $slug = $this->incrementSlug($slug);
-        }
+        if ($this->slug !== $value) {
+            if (static::whereSlug($slug = Str::slug($value) ?: "s")->exists()) {
+                $slug = $this->incrementSlug($slug);
+            }
 
-        $this->attributes["slug"] = $slug;
+            $this->attributes["slug"] = $slug;
+        }
     }
 
     public function incrementSlug($slug)

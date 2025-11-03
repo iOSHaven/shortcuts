@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <div class="flex items-center space-x-3">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+            <a href="{{ route('shortcut.create') }}" class="inline-flex items-center space-x-1 border border-black dark:border-white px-3 py-1">
+                <span>{{ __('Add shortcut') }}</span>
+                <x-heroicon-o-plus class="w-4 h-4" />
+            </a>
+        </div>
     </x-slot>
 
     <div class=" space-y-6">
@@ -30,13 +36,15 @@
                 </div>
             </div>
             @empty
-            <div>No shortcuts found. <span>
-                <a href="{{ route('shortcut.create') }}" class="inline-flex items-center space-x-1 border border-black px-3 py-1">
-                    <span>Add shortcut</span>
-                    <x-heroicon-o-plus class="w-4 h-4" />
-                </a>
-            </span>
-                </div>
+            <div>
+                {{ __('No shortcuts found.') }}
+                <span>
+                    <a href="{{ route('shortcut.create') }}" class="inline-flex items-center space-x-1 border border-black dark:border-white px-3 py-1">
+                        <span>{{ __('Add shortcut') }}</span>
+                        <x-heroicon-o-plus class="w-4 h-4" />
+                    </a>
+                </span>
+            </div>
             @endforelse
         </div>
         {{ $shortcuts->links() }}

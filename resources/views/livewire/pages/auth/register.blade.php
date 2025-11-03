@@ -8,12 +8,11 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
-{
-    public string $name = '';
-    public string $email = '';
-    public string $password = '';
-    public string $password_confirmation = '';
+new #[Layout("layouts.guest")] class extends Component {
+    public string $name = "";
+    public string $email = "";
+    public string $password = "";
+    public string $password_confirmation = "";
 
     /**
      * Handle an incoming registration request.
@@ -21,20 +20,36 @@ new #[Layout('layouts.guest')] class extends Component
     public function register(): void
     {
         $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            "name" => ["required", "string", "max:255"],
+            "email" => [
+                "required",
+                "string",
+                "lowercase",
+                "email",
+                "max:255",
+                "unique:" . User::class,
+            ],
+            "password" => [
+                "required",
+                "string",
+                "confirmed",
+                Rules\Password::defaults(),
+            ],
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        $validated["password"] = Hash::make($validated["password"]);
 
-        event(new Registered($user = User::create($validated)));
+        event(new Registered(($user = User::create($validated))));
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(
+            route("dashboard.shortcuts", absolute: false),
+            navigate: true,
+        );
     }
-}; ?>
+};
+?>
 
 <div>
     <form wire:submit="register">

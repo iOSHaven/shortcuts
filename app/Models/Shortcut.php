@@ -46,11 +46,6 @@ class Shortcut extends Model
         ];
     }
 
-    public function getRouteKeyName()
-    {
-        return "slug";
-    }
-
     public function getDetailsUrlAttribute()
     {
         return $this->slug ? route("shortcut.detail", $this) : "#";

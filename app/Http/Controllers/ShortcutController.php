@@ -9,7 +9,7 @@ class ShortcutController extends Controller
 {
     public function download(Shortcut $shortcut)
     {
-        metric("shortcut:downloads")->measurable($shortcut)->hourly()->record();
+        metric("downloads")->measurable($shortcut)->hourly()->record();
         return redirect($shortcut->link);
     }
 }

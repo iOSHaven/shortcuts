@@ -106,5 +106,14 @@
     "Whoops!": "Whoops!",
     "You are receiving this email because we received a password reset request for your account.": "You are receiving this email because we received a password reset request for your account.",
     "You're logged in!": "You're logged in!",
-    "Your email address is unverified.": "Your email address is unverified."
+    "Your email address is unverified.": "Your email address is unverified.",
+    "Sign in with Google": "Sign in with Google",
+    "Sign in with": "Sign in with",
+    "Connect with Facebook": "Connect with Facebook",
+    "Posts": "Posts",
+    "Create Post": "Create Post",
+    "Title": "Title",
+    "Slug": "Slug",
+    "Markdown": "Markdown",
+    "Edit Post": "Edit Post"
 }

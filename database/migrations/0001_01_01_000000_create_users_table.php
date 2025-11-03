@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string("name");
             $table->boolean("can_view_horizon")->default(0);
+            $table->boolean("can_crud_posts")->default(0);
+            $table->boolean("can_modify_slugs")->default(0);
             $table->timestamps();
         });
 

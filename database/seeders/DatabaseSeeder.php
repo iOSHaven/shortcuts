@@ -13,7 +13,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create(["name" => "iOS Haven"]);
+        $user = User::create([
+            "name" => "iOS Haven",
+            "can_view_horizon" => true,
+            "can_crud_posts" => true,
+            "can_modify_slugs" => true,
+        ]);
+
+        $user->posts()->create([
+            "title" => "Privacy Policy",
+            "markdown" => "",
+        ]);
+
+        $user->posts()->create([
+            "title" => "Terms of Service",
+            "markdown" => "",
+        ]);
+
+        $user->posts()->create([
+            "title" => "How to Delete",
+            "markdown" => "",
+        ]);
 
         $user->socialAccounts()->create([
             "provider_name" => "twitter",

@@ -20,7 +20,7 @@ new #[Layout("layouts.guest")] class extends Component {
         Session::regenerate();
 
         $this->redirectIntended(
-            default: route("dashboard", absolute: false),
+            default: route("dashboard.shortcuts", absolute: false),
             navigate: true,
         );
     }

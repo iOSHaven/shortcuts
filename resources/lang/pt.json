@@ -106,5 +106,8 @@
     "Whoops!": "Ops!",
     "You are receiving this email because we received a password reset request for your account.": "Recebeu esse e-mail porque foi solicitada a redefinição da palavra-passe da sua conta.",
     "You're logged in!": "Você está logado!",
-    "Your email address is unverified.": "Seu endereço de e-mail não foi verificado."
+    "Your email address is unverified.": "Seu endereço de e-mail não foi verificado.",
+    "Sign in with Google": "Entrar com o Google",
+    "Sign in with": "Entrar com o",
+    "Connect with Facebook": "Conectar com o Facebook"
 }

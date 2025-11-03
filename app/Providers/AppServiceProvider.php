@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -111,6 +112,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define("modify-slugs", function ($user) {
+            return $user->can_modify_slugs;
+        });
+
+        Gate::define("crud-posts", function ($user) {
+            return $user->can_crud_posts;
+        });
+
         RouteServiceProvider::loadCachedRoutesUsing(
             fn() => $this->loadCachedRoutes(),
         );

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\Shortcut;
 
 return [
@@ -145,17 +146,13 @@ return [
         "key" => env("MEILISEARCH_KEY"),
         "index-settings" => [
             Shortcut::class => [
-                "filterableAttributes" => [
-                    "name",
-                    "short",
-                    "author_ids",
-                    "score",
-                ],
+                "filterableAttributes" => ["name", "short", "author_ids"],
                 "sortableAttributes" => ["created_at", "score"],
             ],
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
+            Post::class => [
+                "filterableAttributes" => ["title", "author_ids"],
+                "sortableAttributes" => ["created_at", "score"],
+            ],
         ],
     ],
 

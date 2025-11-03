@@ -38,13 +38,15 @@
             </a>
         </div>
         @empty
-        <div>{{ __('No shortcuts found.') }} <span>
-            <a href="{{ route('shortcut.create') }}" class="inline-flex items-center space-x-1 border border-black dark:border-white px-3 py-1">
-                <span>{{ __('Add shortcut') }}</span>
-                <x-heroicon-o-plus class="w-4 h-4" />
-            </a>
-        </span>
-            </div>
+        <div>
+            {{ __('No shortcuts found.') }}
+            <span>
+                <a href="{{ route('shortcut.create') }}" class="inline-flex items-center space-x-1 border border-black dark:border-white px-3 py-1">
+                    <span>{{ __('Add shortcut') }}</span>
+                    <x-heroicon-o-plus class="w-4 h-4" />
+                </a>
+            </span>
+        </div>
         @endforelse
     </div>
     {{ $shortcuts->links() }}

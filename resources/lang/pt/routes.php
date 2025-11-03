@@ -8,7 +8,17 @@ return [
         "edit" => "atalho/editar/{shortcut}",
         "detail" => "atalho/{shortcut}",
     ],
-    "dashboard" => "painel",
+    "post" => [
+        "create" => "publicacao/criar",
+        "edit" => "publicacao/editar/{post}",
+        "detail" => "publicacao/{post}",
+    ],
+    "dashboard" => [
+        "shortcuts" => "dashboard/shortcuts",
+    ],
     "profile" => "perfil",
     "how-to-delete" => "como-excluir",
+    "privacy-policy" => "politica-de-privacidade",
+    "tos" => "termos-de-servico",
+    "login" => "entrar",
 ];

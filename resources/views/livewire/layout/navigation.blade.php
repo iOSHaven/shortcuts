@@ -23,7 +23,7 @@ new class extends Component {
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate>
+                    <a href="{{ route('dashboard.shortcuts') }}" wire:navigate>
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
@@ -36,8 +36,14 @@ new class extends Component {
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('dashboard.shortcuts')" :active="request()->routeIs('dashboard.shortcuts')" wire:navigate>
+                        {{ __('Shortcuts') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.posts')" :active="request()->routeIs('dashboard.posts')" wire:navigate>
+                        {{ __('Posts') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -90,8 +96,11 @@ new class extends Component {
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('dashboard.shortcuts')" :active="request()->routeIs('dashboard.shortcuts')" wire:navigate>
+                {{ __('Shortcuts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.posts')" :active="request()->routeIs('dashboard.posts')" wire:navigate>
+                {{ __('Posts') }}
             </x-responsive-nav-link>
         </div>
 

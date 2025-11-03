@@ -9,6 +9,7 @@ use Livewire\Component;
 use Nesk\Puphpeteer\Puppeteer;
 use Nesk\Rialto\Data\JsFunction;
 use App\Models\Shortcut;
+use Illuminate\Support\Facades\Auth;
 
 class ShortcutCreate extends Component
 {
@@ -27,7 +28,7 @@ class ShortcutCreate extends Component
     public function save()
     {
         $this->validate([
-            "description" => ["min:20", "string", "max:65000", "required"],
+            "description" => ["min:20", "string", "max:60000", "required"],
             "short" => ["min:3", "max:100", "string", "required"],
         ]);
 
@@ -38,6 +39,8 @@ class ShortcutCreate extends Component
             "short" => $this->short,
             "link" => $this->icloud_url,
         ]);
+
+        $shortcut->authors()->syncWithoutDetaching([Auth::user()->id]);
 
         return redirect(route("shortcut.edit", $shortcut));
     }

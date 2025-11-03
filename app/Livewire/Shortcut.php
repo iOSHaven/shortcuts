@@ -10,10 +10,7 @@ class Shortcut extends Component
 
     public function mount()
     {
-        metric("shortcut:views")
-            ->measurable($this->shortcut)
-            ->hourly()
-            ->record();
+        metric("views")->measurable($this->shortcut)->hourly()->record();
     }
 
     public function render()

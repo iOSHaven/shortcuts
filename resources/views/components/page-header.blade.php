@@ -4,7 +4,7 @@
     </div>
     <div class="flex items-center">
         @auth
-        <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+        <a href="{{ route('dashboard.shortcuts') }}">{{ __('Dashboard') }}</a>
         @else
         <a href="{{ route('login') }}">{{ __('Login') }}</a>
         @endauth
