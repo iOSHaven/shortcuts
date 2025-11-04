@@ -1,3 +1,25 @@
+@pushOnce('meta')
+    <title>{{ $this->shortcut->name }} | {{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="{{ $this->shortcut->short }}">
+
+    <meta property="og:title" content="{{ $this->shortcut->name }}">
+    <meta property="og:description" content="{{ $this->shortcut->short }}">
+    <meta property="og:image" content="{{ $this->shortcut->icon }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ $this->shortcut->name }}">
+    <meta name="twitter:description" content="{{ $this->shortcut->short }}">
+    <meta name="twitter:image" content="{{ $this->shortcut->icon }}">
+
+    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <link rel="alternate"
+                hreflang="{{ $localeCode }}"
+                href="{{ LaravelLocalization::getURLFromRouteNameTranslated($localeCode, 'routes.shortcut.detail', ['shortcut' => $this->shortcut], true) }}" />
+    @endforeach
+@endPushOnce
+
 <x-page>
     <div class="space-y-12">
     <x-back-button />

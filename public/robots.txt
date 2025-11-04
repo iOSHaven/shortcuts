@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /dashboard/
+Disallow: /profile
+Allow: /
+Sitemap: https://ioshaven.com/sitemap.xml

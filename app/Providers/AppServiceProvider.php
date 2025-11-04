@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        \Illuminate\View\Factory::macro("hasStack", function ($stack) {
+            return count(data_get($this->pushes, $stack, [])) > 0;
+        });
         URL::macro("resolve", function ($url) {
             $client = new \GuzzleHttp\Client([
                 "allow_redirects" => false, // don't follow automatically
