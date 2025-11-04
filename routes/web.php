@@ -18,6 +18,8 @@ Route::group(
     },
 );
 
+Route::redirect("/apps", "/", 301);
+Route::redirect("/search", "/", 301);
 Route::get("sitemap.xml", SitemapController::class);
 
 require __DIR__ . "/auth.php";
