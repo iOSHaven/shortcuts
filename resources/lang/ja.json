@@ -117,5 +117,14 @@
     "Markdown": "マークダウン",
     "Edit Post": "投稿を編集",
     "Terms of Service": "利用規約",
-    "Privacy Policy": "プライバシーポリシー"
+    "Privacy Policy": "プライバシーポリシー",
+    "Unlink": "リンク解除",
+    "Comments": "コメント",
+    "Sign in": "サインイン",
+    "Only members can leave comments.": "メンバーのみコメントを残すことができます。",
+    "Write some feedback": "フィードバックを書いてください",
+    "Post Comment": "コメントを投稿",
+    "Reply": "返信",
+    "Post Reply": "返信を投稿",
+    "Cancel Reply": "返信をキャンセル"
 }

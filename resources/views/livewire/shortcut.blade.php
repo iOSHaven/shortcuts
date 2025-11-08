@@ -33,8 +33,11 @@
             @endcan
         </div>
     </div>
+
     <div class="prose dark:prose-invert">
         {!! $this->shortcut->html !!}
     </div>
+
+    <livewire:comment-thread :model="$this->shortcut" />
 </div>
 </x-page>

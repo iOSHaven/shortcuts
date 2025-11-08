@@ -26,3 +26,26 @@
 .editor-toolbar a:hover {
     @apply dark:!text-black;
 }
+
+.reply-spine {
+    --spine-width: 2px;
+    --chat-avatar-size: 3rem;
+    --gutter: 1rem;
+    --spine-default: rgba(0, 0, 0, 0.2);
+    --reply-spacing: 10px;
+    border-block-width: var(--spine-width) 0;
+    border-color: var(--spine-default);
+    border-inline-width: var(--spine-width) 0;
+    /* border-start-start-radius: 6px; */
+    border-style: solid;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    inset-inline: calc((var(--chat-avatar-size) / 2 + var(--gutter)) * -1) 100%;
+    bottom: 0;
+    margin-inline: calc(var(--spine-width) * -1 / 2) var(--reply-spacing);
+    /* margin-bottom: calc(var(--custom-message-spacing-vertical-container-cozy) - 4px); */
+    margin-top: calc(var(--spine-width) * -1 / 2);
+}

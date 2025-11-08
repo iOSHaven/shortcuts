@@ -8,6 +8,7 @@ new class extends Component {
     public $google;
     public $facebook;
     public $twitter;
+    public $defaultId;
 
     public function mount()
     {
@@ -16,7 +17,9 @@ new class extends Component {
 
     public function refreshAccounts()
     {
-        $accounts = Auth::user()->socialAccounts()->get();
+        $auth = Auth::user();
+        $this->defaultId = $auth->default_social;
+        $accounts = $auth->socialAccounts()->get();
         $this->google = $accounts->where("provider_name", "google")->first();
         $this->twitter = $accounts->where("provider_name", "twitter")->first();
         $this->facebook = $accounts
@@ -41,6 +44,15 @@ new class extends Component {
                 "delete" => "Account not found.",
             ]);
         }
+    }
+
+    public function setDefault($id)
+    {
+        $auth = Auth::user();
+        $social = $auth->socialAccounts()->findOrFail($id);
+        $auth->default_social = $social->id;
+        $auth->save();
+        $this->refreshAccounts();
     }
 };
 ?>
@@ -70,9 +82,17 @@ new class extends Component {
                         <img src="{{ data_get($this->google, 'data.avatar') }}" alt="Google avatar" class="h-10 w-10 rounded-full" />
                         <span>{{ data_get($this->google, 'data.name') }}</span>
                     </div>
-                    <button type="button" wire:click="deleteSocial({{ $this->google->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
-                        Unlink Gooogle
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        @if($this->defaultId !== $this->google->id)
+                            <button type="button" wire:click="setDefault({{ $this->google->id }})" class="px-3 py-1 bg-gray-100 rounded-lg text-black">
+                                {{ __('Use Avatar') }}
+                            </button>
+                        @endif
+                        <button type="button" wire:click="deleteSocial({{ $this->google->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
+                            {{ __('Unlink') }} Gooogle
+                        </button>
+                    </div>
+
                 </div>
             </div>
         @else
@@ -87,9 +107,17 @@ new class extends Component {
                         <img src="{{ data_get($this->twitter, 'data.avatar') }}" alt="X avatar" class="h-10 w-10 rounded-full" />
                         <span>{{ data_get($this->twitter, 'data.name') }}</span>
                     </div>
-                    <button type="button" wire:click="deleteSocial({{ $this->twitter->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
-                        Unlink X
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        @if($this->defaultId !== $this->twitter->id)
+                            <button type="button" wire:click="setDefault({{ $this->twitter->id }})" class="px-3 py-1 bg-gray-100 rounded-lg text-black">
+                                {{ __('Use Avatar') }}
+                            </button>
+                        @endif
+                        <button type="button" wire:click="deleteSocial({{ $this->twitter->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
+                            {{ __('Unlink') }} X
+                        </button>
+                    </div>
+
                 </div>
             </div>
         @else
@@ -104,9 +132,16 @@ new class extends Component {
                         <img src="{{ data_get($this->facebook, 'data.avatar') }}" alt="Facebook avatar" class="h-10 w-10 rounded-full" />
                         <span>{{ data_get($this->facebook, 'data.name') }}</span>
                     </div>
-                    <button type="button" wire:click="deleteSocial({{ $this->facebook->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
-                        Unlink Facebook
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        @if($this->defaultId !== $this->facebook->id)
+                            <button type="button" wire:click="setDefault({{ $this->facebook->id }})" class="px-3 py-1 bg-gray-100 rounded-lg text-black">
+                                {{ __('Use Avatar') }}
+                            </button>
+                        @endif
+                        <button type="button" wire:click="deleteSocial({{ $this->facebook->id }})" class="px-3 py-1 bg-red-500 rounded-lg text-white">
+                            {{ __('Unlink') }} Facebook
+                        </button>
+                    </div>
                 </div>
             </div>
         @else

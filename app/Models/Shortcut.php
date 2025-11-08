@@ -8,17 +8,20 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasSlug;
+use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Scout\Searchable;
+use App\Contracts\Commentable;
 
 #[ObservedBy(ShortcutObserver::class)]
-class Shortcut extends Model
+class Shortcut extends Model implements Commentable
 {
     use HasSlug;
     use Searchable;
     use HasMetrics;
+    use HasComments;
 
     protected $hidden = ["scrape_id"];
 

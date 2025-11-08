@@ -117,5 +117,14 @@
     "Whoops!": "Whoops!",
     "You are receiving this email because we received a password reset request for your account.": "You are receiving this email because we received a password reset request for your account.",
     "You're logged in!": "You're logged in!",
-    "Your email address is unverified.": "Your email address is unverified."
+    "Your email address is unverified.": "Your email address is unverified.",
+    "Unlink": "Unlink",
+    "Comments": "Comments",
+    "Sign in": "Sign in",
+    "Only members can leave comments.": "Only members can leave comments.",
+    "Write some feedback": "Write some feedback",
+    "Post Comment": "Post Comment",
+    "Reply": "Reply",
+    "Post Reply": "Post Reply",
+    "Cancel Reply": "Cancel Reply"
 }

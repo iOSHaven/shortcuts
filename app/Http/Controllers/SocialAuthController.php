@@ -59,11 +59,14 @@ class SocialAuthController extends Controller
         // No linked account, new user
         $user = User::create(["name" => $socialUser->getName()]);
 
-        $user->socialAccounts()->create([
+        $social = $user->socialAccounts()->create([
             "provider_name" => $provider,
             "provider_id" => $socialUser->getId(),
             "data" => $socialUser,
         ]);
+
+        $user->default_social = $social->id;
+        $user->save();
 
         Auth::login($user);
 

@@ -111,5 +111,14 @@
     "Whoops!": "Ops!",
     "You are receiving this email because we received a password reset request for your account.": "Recebeu esse e-mail porque foi solicitada a redefinição da palavra-passe da sua conta.",
     "You're logged in!": "Você está logado!",
-    "Your email address is unverified.": "Seu endereço de e-mail não foi verificado."
+    "Your email address is unverified.": "Seu endereço de e-mail não foi verificado.",
+    "Unlink": "Desvincular",
+    "Comments": "Comentários",
+    "Sign in": "Entrar",
+    "Only members can leave comments.": "Apenas membros podem deixar comentários.",
+    "Write some feedback": "Escreva um comentário",
+    "Post Comment": "Publicar comentário",
+    "Reply": "Responder",
+    "Post Reply": "Publicar resposta",
+    "Cancel Reply": "Cancelar resposta"
 }
