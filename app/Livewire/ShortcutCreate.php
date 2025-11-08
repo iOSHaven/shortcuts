@@ -72,7 +72,11 @@ class ShortcutCreate extends Component
         $puppeteer = new Puppeteer([
             "executable_path" => config("app.node_path"),
         ]);
-        $browser = $puppeteer->launch();
+        $browser = $puppeteer->launch([
+            "executable_path" => config("app.chrome_path"),
+            "headless" => true,
+            "args" => ["--no-sandbox", "--disable-setuid-sandbox"],
+        ]);
         $page = $browser->newPage();
         $page->goto($this->icloud_url);
         usleep(1000 * 1000);

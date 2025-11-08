@@ -43,6 +43,7 @@ return [
     "app_admins" => env("APP_ADMINS", "admin@mail.com"),
 
     "node_path" => env("NODE_PATH"),
+    "chrome_path" => env("CHROME_PATH"),
 
     /*
     |--------------------------------------------------------------------------
