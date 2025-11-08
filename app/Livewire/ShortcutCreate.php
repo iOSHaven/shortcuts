@@ -70,7 +70,7 @@ class ShortcutCreate extends Component
     public function scrapeShortcut()
     {
         $puppeteer = new Puppeteer([
-            "executable_path" => "/opt/homebrew/opt/node@22/bin/node",
+            "executable_path" => config("app.node_path"),
         ]);
         $browser = $puppeteer->launch();
         $page = $browser->newPage();
