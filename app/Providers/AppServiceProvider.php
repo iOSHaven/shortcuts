@@ -97,10 +97,18 @@ class AppServiceProvider extends ServiceProvider
             }
 
             for ($i = count($middle); $i < $window; $i++) {
-                if ($i > 0) {
-                    $j = max(array_keys($middle)) - $i;
-                    if ($j > 1) {
-                        $middle[$j] = $paginator->url($j);
+                if ($i > 0 && count(array_keys($middle)) > 0) {
+                    try {
+                        $j = max(array_keys($middle)) - $i;
+                        if ($j > 1) {
+                            $middle[$j] = $paginator->url($j);
+                        }
+                    } catch (\Throwable $error) {
+                        throw new \Exception(
+                            "problem with max: " .
+                                json_encode(array_keys($middle)) .
+                                $error->getMessage(),
+                        );
                     }
                 }
             }
