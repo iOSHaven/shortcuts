@@ -17,17 +17,17 @@
                     @php $author = $comment->parent->authors->first() @endphp
                     <div wire:click="jumpToComment({{ $comment->parent_id }})" role="button" class="flex items-center space-x-2 relative ml-16 group cursor-pointer opacity-65 hover:opacity-100">
                         <div class="reply-spine dark:border-gray-500 group-hover:border-[rgba(0,0,0,0.5)] group-hover:dark:border-gray-300"></div>
-                        <img src="{{ data_get($author, 'social.data.avatar') }}" alt="{{ $author->name }} avatar" class="w-6 h-6 rounded-full" />
-                        <div><strong>{{ $author->name }}</strong></div>
+                        <img src="{{ data_get($author, 'social.data.avatar') }}" alt="{{ data_get($author, 'name', 'Deleted User') }} avatar" class="w-6 h-6 rounded-full" />
+                        <div><strong>{{ data_get($author, 'name', 'Deleted User') }}</strong></div>
                         <div>{{ str($comment->parent->markdown)->trim(20) }}</div>
                     </div>
                 @endif
                 @php $author = $comment->authors->first() @endphp
                 <div class="flex items-start space-x-4">
-                    <img src="{{ data_get($author, 'social.data.avatar') }}" alt="{{ $author->name }} avatar" class="w-12 h-12 rounded-full" />
+                    <img src="{{ data_get($author, 'social.data.avatar') }}" alt="{{ data_get($author, 'name', 'Deleted User') }} avatar" class="w-12 h-12 rounded-full" />
                     <div class="grow">
                         <div class="space-x-2">
-                            <strong>{{ $author->name }}</strong>
+                            <strong>{{ data_get($author, 'name', 'Deleted User') }}</strong>
                             <span>{{ $comment->created_at->diffForHumans() }}</span>
                         </div>
                         <div>
