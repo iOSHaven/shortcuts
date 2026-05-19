@@ -21,7 +21,9 @@
 @endPushOnce
 
 @pushOnce('scripts')
+@if(config('app.env') === 'production')
 <x-ad.popunder />
+@endif
 @endPushOnce
 
 <x-page>

@@ -34,6 +34,8 @@
         {{ $slot }}
 
         <x-footer/>
-        <x-ad.social-bar />
+        @if(config('app.env') === 'production')
+            <x-ad.social-bar />
+        @endif
     </body>
 </html>
