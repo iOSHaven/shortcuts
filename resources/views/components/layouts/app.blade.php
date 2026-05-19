@@ -34,5 +34,6 @@
         {{ $slot }}
 
         <x-footer/>
+        <x-ad.social-bar />
     </body>
 </html>

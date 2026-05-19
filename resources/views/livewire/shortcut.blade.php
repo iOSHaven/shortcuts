@@ -20,6 +20,10 @@
     @endforeach
 @endPushOnce
 
+@pushOnce('scripts')
+<x-ad.popunder />
+@endPushOnce
+
 <x-page>
     <div class="space-y-12">
     <x-back-button />

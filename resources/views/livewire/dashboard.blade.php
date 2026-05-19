@@ -22,14 +22,14 @@
                 <div class="flex items-center space-x-3">
                     <img src="{{ data_get($shortcut, 'icon') }}" alt="{{ data_get($shortcut, 'name') }} icon" class="h-[42px] w-[42px] rounded-lg">
                     <div class="flex-grow">
-                        <div class="">{{ $shortcut->name }}</div>
-                        <div class="h-4 overflow-hidden text-ellipsis text-xs">{{ $shortcut->short }}</div>
+                        <div class="">{{ data_get($shortcut, 'name') }}</div>
+                        <div class="h-4 overflow-hidden text-ellipsis text-xs">{{ data_get($shortcut, 'short') }}</div>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <a href="{{ $shortcut->detailsUrl }}" class="uppercase bg-blue-400 p-3 rounded-full">
+                        <a href="{{ data_get($shortcut, 'detailsUrl') }}" class="uppercase bg-blue-400 p-3 rounded-full">
                             <x-heroicon-s-eye class="h-5 w-5"/>
                         </a>
-                        <a href="{{ $shortcut->editUrl }}" class="uppercase bg-amber-400 p-3 rounded-full">
+                        <a href="{{ data_get($shortcut, 'editUrl') }}" class="uppercase bg-amber-400 p-3 rounded-full">
                             <x-heroicon-c-pencil-square class="h-5 w-5"/>
                         </a>
                     </div>

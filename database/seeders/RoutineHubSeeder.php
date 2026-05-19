@@ -30,18 +30,20 @@ class RoutineHubSeeder extends Seeder
 
             $html = $response->body();
 
+            // dump($html);
+
             $crawler = new Crawler($html);
 
             $links = $crawler->filter(
-                ".column.is-6.is-4-widescreen.is-3-widescreen a",
+                "a.rh-appcard",
             );
 
-            // dd(
-            //     collect($links)->map(
-            //         fn($link) => $link->attributes->getNamedItem("href")
-            //             ->nodeValue,
-            //     ),
-            // );
+            dump(
+                collect($links)->map(
+                    fn($link) => $link->attributes->getNamedItem("href")
+                        ->nodeValue,
+                ),
+            );
             foreach ($links as $link) {
                 $href = $link->attributes->getNamedItem("href")->nodeValue;
                 ScrapeShortcut::dispatch($href);

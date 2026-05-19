@@ -17,6 +17,7 @@ use League\HTMLToMarkdown\HtmlConverter;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
 use League\HTMLToMarkdown\Converter\TableConverter;
+use Illuminate\Support\Facades\Log;
 
 class ScrapeShortcut implements ShouldQueue
 {
@@ -38,6 +39,7 @@ class ScrapeShortcut implements ShouldQueue
      */
     public function handle(): void
     {
+        Log::channel('scraping')->info('Starting scraping job for URL: ' . $this->url);
         $client = Http::withHeaders([
             "User-Agent" =>
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " .
@@ -51,16 +53,17 @@ class ScrapeShortcut implements ShouldQueue
         $response = $client->get($this->url);
         $html = $response->body();
         $crawler = new Crawler($html);
-        $downloadLink = $crawler->filter(".actions a")->first()->attr("href");
+        $downloadLink = $crawler->filter("a.rh-cta.matomo_download")->first()->attr("href");
         $this->downloadUrl = "https://routinehub.co$downloadLink";
+        Log::channel('scraping')->info('Download URL: ' . $this->downloadUrl);
         $shortcutUrl = URL::resolve($this->downloadUrl);
 
         $description = $crawler
-            ->filter(".description .content")
+            ->filter(".rh-description .content")
             ->first()
             ->html();
 
-        $subtitle = $crawler->filter(".titles .subtitle")->first()->html();
+        $subtitle = $crawler->filter(".rh-hero-header__brief")->first()->html();
 
         $converter = new HtmlConverter();
         $converter->getEnvironment()->addConverter(new TableConverter());

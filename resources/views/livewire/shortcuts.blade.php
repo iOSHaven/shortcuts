@@ -24,12 +24,12 @@
         @php $shortcuts = $this->shortcuts() @endphp
         @forelse($shortcuts as $shortcut)
         <div class="">
-            <a href="{{ $shortcut->detailsUrl }}" class="no-underline w-full">
+            <a href="{{ data_get($shortcut, 'detailsUrl', '#') }}" class="no-underline w-full">
                 <div class="flex items-center space-x-3 pointer-events-none">
                     <x-shortcut-icon :shortcut="$shortcut"/>
                     <div class="flex-grow">
-                        <div class="text-2xl">{{ $shortcut->name }}</div>
-                        <div class="h-6 overflow-hidden text-ellipsis">{{ $shortcut->short }}</div>
+                        <div class="text-2xl">{{ data_get($shortcut, 'name', 'No name') }}</div>
+                        <div class="h-6 overflow-hidden text-ellipsis">{{ data_get($shortcut, 'short', 'No short') }}</div>
                     </div>
                     <div>
                         <x-heroicon-o-chevron-right class="w-8 h-8"/>
